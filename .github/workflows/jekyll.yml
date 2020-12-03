@@ -70,9 +70,9 @@ jobs:
         env:
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t dev/tribl:$IMAGE_TAG .
-          docker push dev/tribl:$IMAGE_TAG
-          echo "::set-output name=image::dev/tribl:$IMAGE_TAG"
+          docker build -t okpakolee/repo:$IMAGE_TAG .
+          docker push okpakolee/repo:$IMAGE_TAG
+          echo "::set-output name=image::okpakolee/repo:$IMAGE_TAG"
 
       # Runs a single command using the runners shell
       - name: Create Zip Application
