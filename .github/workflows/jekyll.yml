@@ -65,14 +65,15 @@ jobs:
           repository: okpakolee/repo
           tag_with_ref: true
           
-      - name: Build, tag, and push image to Dockerhub
-        id: build-image
-        env:
-          IMAGE_TAG: ${{ github.sha }}
-        run: |
-          docker build -t okpakolee/repo:$IMAGE_TAG .
-          docker push okpakolee/repo:$IMAGE_TAG
-          echo "::set-output name=image::okpakolee/repo:$IMAGE_TAG"
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+         push: true
+         tags: okpakolee/repo:latest
+        
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
 
       # Runs a single command using the runners shell
       - name: Create Zip Application
